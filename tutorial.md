@@ -352,6 +352,27 @@ end
 ## Run the migration
 `$ mix ecto.migrate`
 
+## Create a schema file for 'remark
+Create a new file called 'remark.ex' under the `lib/elixir_todo_app` folder
+
+```
+defmodule ElixirTodoApp.Remark do
+  use Ecto.Schema 
+
+  schema "remarks" do
+    field :body, :string 
+    belongs_to :todo, ElixirTodoApp.Book
+  end
+
+  def changeset(remark, params \\ %{}) do
+    remark 
+    |> Ecto.Changeset.cast(params, [:body, :todo_id])
+    |> Ecto.Changeset.validate_required([:body])
+  end
+end
+```
+
+## Update the 'todo.ex' schema to refer to remark 
 
 
 

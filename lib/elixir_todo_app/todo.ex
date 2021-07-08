@@ -6,6 +6,7 @@ defmodule ElixirTodoApp.Todo  do
     field :user, :string
     field :completed, :boolean, default: :false
     field :on_hold, :boolean, default: :false
+    has_one :remark, ElixirTodoApp.Remark
 
   end
 
