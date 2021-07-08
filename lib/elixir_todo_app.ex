@@ -8,11 +8,12 @@ defmodule ElixirTodoApp do
     
     input_text = ~S"""
       1. List Todos
-      2. Add a todo
-      3. Mark todo as completed
-      4. Delete todo
-      5. Add Remark  
-      6. Exit
+      2. List Todos(with Remark)
+      3. Add a todo
+      4. Mark todo as completed
+      5. Delete todo
+      6. Add Remark  
+      7. Exit
       """
 
     choice = IO.gets(input_text) |> String.trim_trailing |> String.to_integer
@@ -22,21 +23,24 @@ defmodule ElixirTodoApp do
         show_todos()
         start()
       2 ->
+        show_todo_with_remarks()
+        start()
+      3 ->
         add_todo()
         start()
 
-      3 ->
+      4 ->
         mark_todo_as_complete()
         start()
-      4 ->
+      5 ->
         delete_todo()
         start()
 
-      5 ->
+      6 ->
         add_remark_for_todo()
         start()
 
-      6 ->
+      7 ->
         IO.puts("Goodbye")
     end
   end
@@ -51,6 +55,22 @@ defmodule ElixirTodoApp do
       end
     )
     IO.puts("----------------------------------------------------------------------------------------")
+  end
+
+  def show_todo_with_remarks do
+    todos = Repo.all(Todo) |> Repo.preload(:remark) 
+    IO.puts("ALL TODOS WITH REMARK")
+    IO.puts("----------------------------------------------------------------------------------------")
+
+    Enum.each(todos, fn(todo) ->
+      IO.puts("#{todo.id}. #{todo.title} by #{todo.user} - on hold: #{todo.on_hold} - completed: #{todo.completed} ")  
+      if todo.remark do
+        IO.puts("Remark: ")
+        IO.puts(todo.remark.body)  
+      end
+    end
+    )
+    IO.puts("----------------------------------------------------------------------------------------")    
   end
 
   def add_todo do
@@ -126,7 +146,7 @@ defmodule ElixirTodoApp do
     remark = %Remark{body: body, todo_id: id}
 
     case Repo.insert(remark) do 
-      {:ok, remark} -> 
+      {:ok, _remark} -> 
         IO.puts("Remark added successfully.")
 
       {:error, _} ->
@@ -134,5 +154,6 @@ defmodule ElixirTodoApp do
 
     end
   end
+
 
 end

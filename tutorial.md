@@ -329,7 +329,9 @@ Add an option to show all todos in the database.
 
 
 # Add remarks to todos
-Let's now create a remark model and connect it with todos.  A todo will have only one remark (This is our app requirement)
+Let's now create a remark model and connect it with todos.  A todo will have only one remark (This is our app requirement).  
+
+Goal: To understand how association works
 
 ## Create the migration file
 
@@ -386,6 +388,12 @@ end
 ```
 
 # Add the option to capture remark  to the main app
+Refer the code for `add_remark_for_todo()` function
+
+
+# Show todo with remarks
+Refer the `start()` function and `show_todo_with_remarks()` 
+
 
 
 
