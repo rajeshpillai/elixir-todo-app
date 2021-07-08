@@ -3,7 +3,7 @@ defmodule ElixirTodoApp.Remark do
 
   schema "remarks" do
     field :body, :string 
-    belongs_to :todo, ElixirTodoApp.Book
+    belongs_to :todo, ElixirTodoApp.Todo
   end
 
   def changeset(remark, params \\ %{}) do

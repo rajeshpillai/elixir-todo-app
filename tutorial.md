@@ -361,7 +361,7 @@ defmodule ElixirTodoApp.Remark do
 
   schema "remarks" do
     field :body, :string 
-    belongs_to :todo, ElixirTodoApp.Book
+    belongs_to :todo, ElixirTodoApp.Todo
   end
 
   def changeset(remark, params \\ %{}) do
@@ -373,6 +373,36 @@ end
 ```
 
 ## Update the 'todo.ex' schema to refer to remark 
+
+```
+ schema "todos" do
+  field :title, :string
+  field :user, :string
+  field :completed, :boolean, default: :false
+  field :on_hold, :boolean, default: :false
+  has_one :remark, ElixirTodoApp.Remark
+
+end
+```
+
+# Add the option to capture remark  to the main app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
