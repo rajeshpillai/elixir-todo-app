@@ -48,29 +48,31 @@ defmodule ElixirTodoApp do
   def show_todos do 
     todos = Repo.all(Todo) 
     IO.puts("ALL TODOS\n")
-    IO.puts("----------------------------------------------------------------------------------------")
+    IO.puts("id\t\ttitle\tuser\ton-hold\tcompleted")
+    IO.puts("-------------------------------------------------------------------------")
 
     Enum.each(todos, fn(todo) ->
-      IO.puts("#{todo.id}. #{todo.title} by #{todo.user} - on hold: #{todo.on_hold} - completed: #{todo.completed} ")  
+      IO.puts("#{todo.id}\t#{todo.title}\t#{todo.user}\t#{todo.on_hold}\t#{todo.completed} ")  
       end
     )
-    IO.puts("----------------------------------------------------------------------------------------")
+    IO.puts("-------------------------------------------------------------------------")
   end
 
   def show_todo_with_remarks do
     todos = Repo.all(Todo) |> Repo.preload(:remark) 
-    IO.puts("ALL TODOS WITH REMARK")
-    IO.puts("----------------------------------------------------------------------------------------")
+    IO.puts("ALL TODOS(WITH REMARK)")
+    IO.puts("--------------------------------------------------------------------------")
 
+    IO.puts("id\t\ttitle\tuser\ton-hold\tcompleted")
     Enum.each(todos, fn(todo) ->
-      IO.puts("#{todo.id}. #{todo.title} by #{todo.user} - on hold: #{todo.on_hold} - completed: #{todo.completed} ")  
+      IO.puts("#{todo.id}\t#{todo.title}\t#{todo.user}\t#{todo.on_hold}\t#{todo.completed} ")  
       if todo.remark do
         IO.puts("Remark: ")
         IO.puts(todo.remark.body)  
       end
     end
     )
-    IO.puts("----------------------------------------------------------------------------------------")    
+    IO.puts("---------------------------------------------------------------------------")    
   end
 
   def add_todo do
