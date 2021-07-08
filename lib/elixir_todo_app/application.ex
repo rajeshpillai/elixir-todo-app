@@ -9,6 +9,7 @@ defmodule ElixirTodoApp.Application do
     children = [
       # Starts a worker by calling: ElixirTodoApp.Worker.start_link(arg)
       # {ElixirTodoApp.Worker, arg}
+      {ElixirTodoApp.Repo, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
