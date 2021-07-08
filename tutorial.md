@@ -83,8 +83,40 @@ Create a file named "todo.ex" in the "lib/elixir_todo_app" folder.  Update the f
 code snippet.
 
 ```
+defmodule ElixirTodoApp.Todo  do
+  use Ecto.Schema
+
+  schema "todos" do
+    field :title, :string
+    field :user, :string
+    field :completed, :boolean
+  end
+end
 
 ```
+# Test the application
+Open up 'lib/elixir_todo_app.ex' and add the code as shown below.
+```
+defmodule ElixirTodoApp do
+  def start do
+    IO.puts ("Hello Elixir...")
+  end
+end
+
+```
+
+Test the code in the terminal window 
+
+$ iex -S mix
+iex > ElixirTodoApp.start
+
+After running the above command, "Hello Elixir..." should be printed on the screen.
+
+
+
+
+
+
 
 
 

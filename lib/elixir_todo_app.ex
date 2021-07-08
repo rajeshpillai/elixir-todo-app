@@ -1,18 +1,5 @@
 defmodule ElixirTodoApp do
-  @moduledoc """
-  Documentation for ElixirTodoApp.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ElixirTodoApp.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def start do
+    IO.puts ("Hello Elixir...")
   end
 end
