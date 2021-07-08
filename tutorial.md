@@ -78,6 +78,15 @@ $ mix ecto.migrate
 After the above command is executed a table called "todos" should be created in the database.
 
 
+# Create a model/schema to work the the database table in your application
+Create a file named "todo.ex" in the "lib/elixir_todo_app" folder.  Update the file with the follow
+code snippet.
+
+```
+
+```
+
+
 
 
 
