@@ -263,6 +263,37 @@ todo = %Todo{title: title, user: user, completed: false, on_hold: on_hold == "ye
 changeset = Todo.changeset(todo, %{})
 ```
 
+## Refactor the show todos to it's own function
+
+```
+  def show_todos do 
+    todos = Repo.all(Todo) 
+    IO.puts("----------------------------------------")
+
+    Enum.each(todos, fn(todo) ->
+      IO.puts("#{todo.title} by #{todo.user} - on hold: #{todo.on_hold}")  
+      end
+    )
+    IO.puts("----------------------------------------")
+  end
+```
+
+Update the add_todo function to use show_todos 
+
+```
+ case Repo.insert(changeset) do
+    {:ok, todo} ->
+      IO.puts("#{todo.title} by #{todo.user} created successfuly.")
+      
+      show_todos()
+
+    {:error, _} ->
+      IO.puts("Please enter valid values")
+      add_todo()
+  end
+```
+
+
 
 
 

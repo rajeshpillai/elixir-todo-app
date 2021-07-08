@@ -15,6 +15,17 @@ defmodule ElixirTodoApp do
     end
   end
 
+  def show_todos do 
+    todos = Repo.all(Todo) 
+    IO.puts("----------------------------------------")
+
+    Enum.each(todos, fn(todo) ->
+      IO.puts("#{todo.title} by #{todo.user} - on hold: #{todo.on_hold}")  
+      end
+    )
+    IO.puts("----------------------------------------")
+  end
+
   def add_todo do
     IO.puts("Adding a todo")
     title = IO.gets("What do you want to get accomplished?\n") |> String.trim_trailing
@@ -28,13 +39,8 @@ defmodule ElixirTodoApp do
     case Repo.insert(changeset) do
       {:ok, todo} ->
         IO.puts("#{todo.title} by #{todo.user} created successfuly.")
-        todos = Repo.all(Todo) 
-        IO.puts("----------------------------")
-        Enum.each(todos, fn(todo) ->
-          IO.puts("#{todo.title} by #{todo.user} - on hold: #{todo.on_hold}")  
-        end
-        )
-        IO.puts("----------------------------")
+        
+        show_todos()
 
       {:error, _} ->
         IO.puts("Please enter valid values")
