@@ -2,10 +2,12 @@
 A system to manage todos.
 
 # Features
+- Show Todos
 - Create Todos
 - Edit Todos
 - Mark Todo as completed
-- Add remarks to todo
+- Delete Todo
+- Add remarks to todo*
 
 # Create a new project
 Create a mix project with supervisor
