@@ -303,6 +303,9 @@ Add an option to capture todo ID as input from user to delete a todo.  Ask confi
 If the user types in 'yes' then delete, otherwise dont' delete.
 (Refer the code for more details, but try to implement on our own first)
 
+# Show all todos
+Add an option to show all todos in the database.
+
 
 
 

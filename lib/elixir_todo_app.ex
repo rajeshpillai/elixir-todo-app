@@ -3,34 +3,38 @@ defmodule ElixirTodoApp do
   alias ElixirTodoApp.Repo
   def start do
     IO.puts ("Hello, What do you want to do?")
-    choice = IO.gets("1. Add a todo\n2. Mark todo as completed\n3. Delete todo\n4. Exit\n") |> String.trim_trailing |> String.to_integer
+    choice = IO.gets("1. List Todos\n2. Add a todo\n3. Mark todo as completed\n4. Delete todo\n5. Exit\n") |> String.trim_trailing |> String.to_integer
 
     case choice do
       1 ->
+        show_todos()
+        start()
+      2 ->
         add_todo()
         start()
 
-      2 ->
+      3 ->
         mark_todo_as_complete()
         start()
-      3 ->
+      4 ->
         delete_todo()
         start()
 
-      4 ->
+      5 ->
         IO.puts("Goodbye")
     end
   end
 
   def show_todos do 
     todos = Repo.all(Todo) 
-    IO.puts("----------------------------------------")
+    IO.puts("ALL TODOS\n")
+    IO.puts("----------------------------------------------------------------------------------------")
 
     Enum.each(todos, fn(todo) ->
       IO.puts("#{todo.id}. #{todo.title} by #{todo.user} - on hold: #{todo.on_hold} - completed: #{todo.completed} ")  
       end
     )
-    IO.puts("----------------------------------------")
+    IO.puts("----------------------------------------------------------------------------------------")
   end
 
   def add_todo do
