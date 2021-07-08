@@ -298,6 +298,15 @@ Add an option to capture todo ID as input from user to mark todo as complete.  M
 (Refer the code for more details, but try to implement on our own first)
 
 
+# Delete a todo
+Add an option to capture todo ID as input from user to delete a todo.  Ask confirmation from user before deleting.
+If the user types in 'yes' then delete, otherwise dont' delete.
+(Refer the code for more details, but try to implement on our own first)
+
+
+
+
+
 
 
 

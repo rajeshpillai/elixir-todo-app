@@ -3,7 +3,7 @@ defmodule ElixirTodoApp do
   alias ElixirTodoApp.Repo
   def start do
     IO.puts ("Hello, What do you want to do?")
-    choice = IO.gets("1. Add a todo\n2. Mark todo as completed\n3. Exit\n") |> String.trim_trailing |> String.to_integer
+    choice = IO.gets("1. Add a todo\n2. Mark todo as completed\n3. Delete todo\n4. Exit\n") |> String.trim_trailing |> String.to_integer
 
     case choice do
       1 ->
@@ -14,6 +14,10 @@ defmodule ElixirTodoApp do
         mark_todo_as_complete()
         start()
       3 ->
+        delete_todo()
+        start()
+
+      4 ->
         IO.puts("Goodbye")
     end
   end
@@ -67,5 +71,27 @@ defmodule ElixirTodoApp do
         show_todos()
     end
   end
+
+  def delete_todo  do
+    show_todos() 
+    id = IO.gets("Enter todo id to be deleted: \n") |> String.trim_trailing() |> String.to_integer
+    todo = Repo.get(Todo, id) 
+
+    confirm = IO.gets("Are you sure you want to delete #{todo.title}?(yes) or (no)") |> String.trim_trailing
+    
+    if confirm == "yes" do 
+      case Repo.delete(todo) do
+        {:ok, _} ->
+          IO.puts("#{todo.title} by #{todo.user} deleted successfuly.")
+          show_todos()
+
+        {:error, _} ->
+          IO.puts("We are sorry. Some error occurred")
+          show_todos()
+      end
+    end
+
+  end
+
 
 end
