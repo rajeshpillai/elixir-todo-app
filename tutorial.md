@@ -9,6 +9,25 @@ A system to manage todos.
 - Delete Todo
 - Add remarks to todo*
 
+
+# Model and Relations
+```
+todo ->
+  title
+  user
+  completed
+  on_hold
+  has_one: remark
+
+remark ->
+  body: text
+  belongs_to:  :todo
+
+```
+
+
+
+
 # Create a new project
 Create a mix project with supervisor
 
@@ -309,8 +328,29 @@ If the user types in 'yes' then delete, otherwise dont' delete.
 Add an option to show all todos in the database.
 
 
+# Add remarks to todos
+Let's now create a remark model and connect it with todos.  A todo will have only one remark (This is our app requirement)
 
+## Create the migration file
 
+`$ mix ecto.gen.migration create_remarks`
+
+## Update the newly created migration file with the below script
+```
+defmodule ElixirTodoApp.Repo.Migrations.CreateRemarks do
+  use Ecto.Migration
+
+  def change do
+    create table (:remarks) do
+      add :body, :text 
+      add :todo_id, references(:todos, on_delete: :delete_all)
+    end
+  end
+end
+```
+
+## Run the migration
+`$ mix ecto.migrate`
 
 
 
