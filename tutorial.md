@@ -256,11 +256,12 @@ $ mix ecto.migrate
 ## Update the elixir_todo_app.ex to capture the on_hold field
 Only the changed code is displayed below.  Refer full source code for clarity.
 
-`on_hold = IO.gets("Do you want to keep this task on hold for future?(yes) or (no)\n") |> String.trim_trailing
+```
+on_hold = IO.gets("Do you want to keep this task on hold for future?(yes) or (no)\n") |> String.trim_trailing
 
 todo = %Todo{title: title, user: user, completed: false, on_hold: on_hold == "yes"}
 changeset = Todo.changeset(todo, %{})
-
+```
 
 
 
