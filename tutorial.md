@@ -123,7 +123,7 @@ defmodule ElixirTodoApp do
   alias ElixirTodoApp.Repo
 
   def start do
-    IO.puts ("Hello, Waht do you want to do?")
+    IO.puts ("Hello, What  do you want to do?")
     choice = IO.gets("1. Add a todo\n2. Exit\n") |> String.trim_trailing |> String.to_integer
 
     case choice do
@@ -138,7 +138,7 @@ defmodule ElixirTodoApp do
 
   def add_todo do
     IO.puts("Adding a todo")
-    title = IO.gets("What do you want to accomplish today?\n") |> String.trim_trailing
+    title = IO.gets("What do you want to get accomplished?\n") |> String.trim_trailing
     user = IO.gets("Your name plase?\n") |> String.trim_trailing
   end
 
@@ -222,6 +222,45 @@ Add the :error clause after the :ok clause
     IO.puts("Please enter valid values")
     add_todo()
 ```
+
+
+## Create migration script for creating an on_hold field in the todos table
+$ mix ecto.gen.migration add_on_hold_to_todo 
+
+After running the above script a migration file will be created.  Open the file, named 'xxxx_add_on_hold_to_todos.exs" and update the script as shown below.
+
+```
+ def change do
+  alter table(:todos) do 
+    add :on_hold, :boolean
+  end
+end
+
+```
+
+## Update the Todo Schema with the new field (lib/elixir_todo_app/todo.ex)
+I also added default values of boolean fields to false.
+
+```
+schema "todos" do
+  field :title, :string
+  field :user, :string
+  field :completed, :boolean, default: :false
+  field :on_hold, :boolean, default: :false
+end
+```
+
+## Run the migration
+$ mix ecto.migrate
+
+## Update the elixir_todo_app.ex to capture the on_hold field
+Only the changed code is displayed below.  Refer full source code for clarity.
+
+`on_hold = IO.gets("Do you want to keep this task on hold for future?(yes) or (no)\n") |> String.trim_trailing
+
+todo = %Todo{title: title, user: user, completed: false, on_hold: on_hold == "yes"}
+changeset = Todo.changeset(todo, %{})
+
 
 
 

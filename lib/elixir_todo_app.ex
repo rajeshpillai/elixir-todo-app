@@ -17,11 +17,12 @@ defmodule ElixirTodoApp do
 
   def add_todo do
     IO.puts("Adding a todo")
-    title = IO.gets("What do you want to accomplish today?\n") |> String.trim_trailing
+    title = IO.gets("What do you want to get accomplished?\n") |> String.trim_trailing
     user = IO.gets("Your name please?\n") |> String.trim_trailing
+    on_hold = IO.gets("Do you want to keep this task on hold for future?(yes) or (no)\n") |> String.trim_trailing
 
     # Create a new todo
-    todo = %Todo{title: title, user: user, completed: false}
+    todo = %Todo{title: title, user: user, completed: false, on_hold: on_hold == "yes"}
     changeset = Todo.changeset(todo, %{})
 
     case Repo.insert(changeset) do
@@ -30,7 +31,7 @@ defmodule ElixirTodoApp do
         todos = Repo.all(Todo) 
         IO.puts("----------------------------")
         Enum.each(todos, fn(todo) ->
-          IO.puts("#{todo.title} by #{todo.user}")  
+          IO.puts("#{todo.title} by #{todo.user} - on hold: #{todo.on_hold}")  
         end
         )
         IO.puts("----------------------------")
