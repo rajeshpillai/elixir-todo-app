@@ -11,7 +11,8 @@ defmodule ElixirTodoApp do
       2. Add a todo
       3. Mark todo as completed
       4. Delete todo
-      5. Exit
+      5. Add Remark  
+      6. Exit
       """
 
     choice = IO.gets(input_text) |> String.trim_trailing |> String.to_integer
@@ -32,6 +33,10 @@ defmodule ElixirTodoApp do
         start()
 
       5 ->
+        add_remark_for_todo()
+        start()
+
+      6 ->
         IO.puts("Goodbye")
     end
   end
@@ -110,19 +115,20 @@ defmodule ElixirTodoApp do
   def add_remark_for_todo() do 
     show_todos() 
     id = IO.gets("Enter todo id for adding remark.") 
-      |> String.trim_leading 
+      |> String.trim_trailing
       |> String.to_integer    
 
     todo = Repo.get(Todo, id)
 
     IO.puts("Entering remarks for todo #{todo.title}")
-    body = IO.gets("Type in your remarks please.") |> String.trim_leading
+    body = IO.gets("Type in your remarks please.\n") |> String.trim_leading
 
     remark = %Remark{body: body, todo_id: id}
 
     case Repo.insert(remark) do 
       {:ok, remark} -> 
         IO.puts("Remark added successfully.")
+
       {:error, _} ->
         IO.puts("Try again. Some error happened during processing!")
 
