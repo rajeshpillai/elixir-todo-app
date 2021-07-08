@@ -1,6 +1,9 @@
 # ElixirTodoApp
 
-**TODO: Add description**
+**For self learning
+
+## Reference
+Refer the tutorial.md for basic steps to create the todo app
 
 ## Installation
 
