@@ -395,6 +395,21 @@ Refer the code for `add_remark_for_todo()` function
 Refer the `start()` function and `show_todo_with_remarks()` 
 
 
+#  Research
+Reserch how one to many and many to many associations work in Ecto.  Share your learnings with examples
+
+# Assignment
+
+  - Update remark 
+  - Delete remark
+
+
+  
+
+
+
+
+
 
 
 
