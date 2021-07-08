@@ -47,6 +47,39 @@ children = [
 
 ```
 
+# CAUTION:  
+Ensure your postgres server is running before running the migration.Ensure you
+
+# Create migration file
+$ mix ecto.create
+$ mix ecto.gen.migration create_todos
+
+After running the above command a migration file will be created in the folder `priv/repo/migrations' with the name
+xxxxxx_create_todos.exs
+
+# Update the migration file
+Open the xxxx_create_todos.exs file and update the script as shown below.
+
+
+```
+ def change do
+    create table (:todos) do
+      add :title, :string
+      add :user, :string
+      add :completed, :boolean
+    end
+  end
+```
+
+# Run the migration
+
+$ mix ecto.migrate
+
+After the above command is executed a table called "todos" should be created in the database.
+
+
+
+
 
 
 
