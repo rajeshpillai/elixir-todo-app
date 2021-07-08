@@ -1,6 +1,12 @@
 # Overview
 A system to manage todos.
 
+# Objectives
+Learn basic CRUD development on terminal/console app using Elixir and Ecto
+
+# Pre-requisites
+Knowledge of basic elixir, list, maps, anonymous function
+
 # Features
 - Show Todos
 - Create Todos
@@ -404,7 +410,7 @@ Reserch how one to many and many to many associations work in Ecto.  Share your 
   - Delete remark
 
 
-  
+
 
 
 
