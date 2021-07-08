@@ -21,9 +21,10 @@ defmodule ElixirTodoApp do
     user = IO.gets("Your name please?\n") |> String.trim_trailing
 
     # Create a new todo
-    todo =%Todo{title: title, user: user, completed: false}
+    todo = %Todo{title: title, user: user, completed: false}
+    changeset = Todo.changeset(todo, %{})
 
-    case Repo.insert(todo) do
+    case Repo.insert(changeset) do
       {:ok, todo} ->
         IO.puts("#{todo.title} by #{todo.user} created successfuly.")
         todos = Repo.all(Todo) 
@@ -33,6 +34,10 @@ defmodule ElixirTodoApp do
         end
         )
         IO.puts("----------------------------")
+
+      {:error, _} ->
+        IO.puts("Please enter valid values")
+        add_todo()
     end
   end
 

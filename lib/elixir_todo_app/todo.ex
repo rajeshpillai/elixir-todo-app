@@ -7,4 +7,11 @@ defmodule ElixirTodoApp.Todo  do
     field :completed, :boolean
 
   end
+
+  def changeset(todo, params \\ %{}) do
+    todo 
+      |> Ecto.Changeset.cast(params, [:title, :user, :completed])
+      |> Ecto.Changeset.validate_required([:title, :user])
+  end
+
 end

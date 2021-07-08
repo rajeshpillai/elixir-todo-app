@@ -170,6 +170,64 @@ def add_todo do
     end
   end
 ```
+# New Todo Validation
+Changeset are built into Ecto which provides validations and other features.
+
+Add the following changeset function in 'lib/elixir_todo_app/todo.ex'
+
+```
+def changeset(todo, params \\ %{}) do
+  todo 
+    |> Ecto.Changeset.cast(params, [:title, :user, :completed])
+    |> Ecto.Changeset.validate_required([:title, :user])
+end
+```
+
+Modify the 'lib/elixir_todo_app.ex' file as shown below.  The main change are we are capturing changeset and passing the changeset into Repo.insert function
+
+```
+def add_todo do
+    IO.puts("Adding a todo")
+    title = IO.gets("What do you want to accomplish today?\n") |> String.trim_trailing
+    user = IO.gets("Your name please?\n") |> String.trim_trailing
+
+    # Create a new todo
+    todo = %Todo{title: title, user: user, completed: false}
+    changeset = Todo.changeset(todo, %{})
+
+    case Repo.insert(changeset) do
+      {:ok, todo} ->
+        IO.puts("#{todo.title} by #{todo.user} created successfuly.")
+        todos = Repo.all(Todo) 
+        IO.puts("----------------------------")
+        Enum.each(todos, fn(todo) ->
+          IO.puts("#{todo.title} by #{todo.user}")  
+        end
+        )
+        IO.puts("----------------------------")
+    end
+  end
+```
+
+At this point open up iex using iex -S mix and try to create a new todo with empty title and user.  You 
+should get an error on your terminal as the validations kicks in and prevents saving invalid items to the
+database.
+
+## Add error handling to add_todo
+Add the :error clause after the :ok clause
+
+```
+
+  {:error, _} ->
+    IO.puts("Please enter valid values")
+    add_todo()
+```
+
+
+
+
+
+
 
 
 
